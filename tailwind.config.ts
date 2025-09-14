@@ -14,13 +14,16 @@ export default {
     },
     extend: {
       fontFamily: {
+        poppins: ['Poppins', 'sans-serif'],
         inter: ['Inter', 'sans-serif'],
       },
       colors: {
-        'slideshow': {
-          DEFAULT: "hsl(var(--slideshow-bg))",
-          text: "hsl(var(--slideshow-text))",
-          muted: "hsl(var(--slideshow-muted))",
+        'dialog': {
+          bg: "hsl(var(--dialog-bg))",
+          text: "hsl(var(--dialog-text))",
+          card: "hsl(var(--dialog-card))",
+          shadow: "hsl(var(--dialog-shadow))",
+          accent: "hsl(var(--dialog-accent))",
         },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

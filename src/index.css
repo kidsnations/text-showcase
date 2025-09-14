@@ -2,15 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Professional Slideshow Design System */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+/* Warm and Welcoming Design System */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 @layer base {
   :root {
-    /* Slideshow Theme */
-    --slideshow-bg: 0 0% 0%;
-    --slideshow-text: 0 0% 100%;
-    --slideshow-muted: 0 0% 70%;
+    /* Warm Dialog Theme */
+    --dialog-bg: 20 14% 96%;
+    --dialog-text: 20 14% 4%;
+    --dialog-card: 0 0% 100%;
+    --dialog-shadow: 20 14% 80%;
+    --dialog-accent: 39 77% 88%;
     
     /* Standard System Colors */
     --background: 0 0% 100%;
@@ -105,37 +107,41 @@
   }
 
   body {
-    @apply bg-background text-foreground font-inter;
+    @apply bg-background text-foreground font-poppins;
   }
 }
 
 @layer components {
-  /* Slideshow Styles */
-  .slideshow-container {
-    @apply fixed inset-0 bg-slideshow text-slideshow-text font-inter;
+  /* Dialog Styles */
+  .dialog-container {
+    @apply min-h-screen bg-dialog-bg p-6 md:p-12;
   }
   
-  .slide {
-    @apply absolute inset-0 flex items-center justify-center p-8 opacity-0 transition-opacity duration-1000 ease-in-out;
+  .dialog-content {
+    @apply max-w-4xl mx-auto flex flex-col items-center space-y-8;
   }
   
-  .slide.active {
-    @apply opacity-100;
+  .dialog-item {
+    @apply bg-dialog-card text-dialog-text p-6 md:p-8 rounded-2xl shadow-lg border border-dialog-shadow/20 
+           max-w-3xl w-full text-center opacity-0 transform translate-y-4 
+           transition-all duration-700 ease-out hover:shadow-xl hover:scale-105;
   }
   
-  .slide-content {
-    @apply text-center max-w-4xl mx-auto;
+  .dialog-item.visible {
+    @apply opacity-100 translate-y-0;
   }
   
-  .slide-text {
-    @apply text-2xl md:text-4xl lg:text-5xl font-light leading-relaxed tracking-wide;
+  .dialog-text {
+    @apply text-lg md:text-xl lg:text-2xl font-medium leading-relaxed text-dialog-text;
   }
   
   .process-flow {
-    @apply text-lg md:text-xl lg:text-2xl font-semibold leading-relaxed text-slideshow-text mb-8 tracking-wider;
+    @apply text-base md:text-lg lg:text-xl font-semibold text-dialog-accent bg-dialog-accent/10 
+           px-6 py-4 rounded-xl border border-dialog-accent/20;
   }
   
   .architecture-image {
-    @apply max-w-full max-h-96 object-contain mx-auto rounded-lg shadow-2xl;
+    @apply max-w-full max-h-96 object-contain rounded-2xl shadow-lg border border-dialog-shadow/20
+           hover:shadow-xl transition-all duration-300;
   }
 }

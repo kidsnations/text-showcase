@@ -1,69 +1,60 @@
 import { useState, useEffect } from 'react';
 
-const slides = [
-  "Sir, I am unable to relocate due to family responsibilities.",
-  "I am the only child, taking care of my parents, my wife, and three children.",
-  "My parents are over 68 and unable to manage their day-to-day needs on their own.",
-  "I understand the costs in the Caesars project are increasing. I sincerely request you to consider me for any DevOps project that can be managed from offshore. I promise to deliver results in minimal time.",
-  "The next steps will be to automate the infrastructure code using Terraform and migrate this website into a containerized environment with Azure Kubernetes Services (AKS) and Azure Container Registry (ACR)."
+const dialogs = [
+  "Sir, I am unable to relocate due to my family responsibilities.",
+  "I am a single child, taking care of my parents, my wife, and three children.",
+  "My parents are over 68 and need assistance with daily tasks.",
+  "I understand that costs are increasing in the Caesars project. I would be grateful if you could consider me for any DevOps project running offshore. I promise to deliver efficiently.",
+  "This is a monolithic website, and the next step is to automate the infrastructure code through Terraform and migrate it into a containerized environment using Azure Kubernetes Services and Azure Container Registry: Code → Dockerfile → Docker Image → Push to ACR → Kubernetes."
 ];
 
-const processFlow = "Code → Dockerfile → Docker Image → Push to ACR → Deploy to Kubernetes";
-const diagramUrl = "https://raw.githubusercontent.com/kidsnations/screenshots/main/<DIAGRAM_FILENAME>.png";
+const diagramUrl = "https://raw.githubusercontent.com/kidsnations/screenshots/main/Project.png";
 
 const Slideshow = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [showTechnicalNote, setShowTechnicalNote] = useState(false);
+  const [visibleDialogs, setVisibleDialogs] = useState<number[]>([]);
+  const [showDiagram, setShowDiagram] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => {
-        if (prev < slides.length - 1) {
-          return prev + 1;
-        } else {
-          setShowTechnicalNote(true);
+      setVisibleDialogs((prev) => {
+        const nextIndex = prev.length;
+        if (nextIndex < dialogs.length) {
+          return [...prev, nextIndex];
+        } else if (!showDiagram) {
+          setShowDiagram(true);
           clearInterval(timer);
-          return prev;
         }
+        return prev;
       });
     }, 3000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [showDiagram]);
 
-  if (showTechnicalNote) {
-    return (
-      <div className="slideshow-container">
-        <div className="slide active">
-          <div className="slide-content">
-            <p className="process-flow">
-              {processFlow}
+  return (
+    <div className="dialog-container">
+      <div className="dialog-content">
+        {dialogs.map((dialog, index) => (
+          <div
+            key={index}
+            className={`dialog-item ${visibleDialogs.includes(index) ? 'visible' : ''}`}
+          >
+            <p className="dialog-text">
+              {dialog}
             </p>
+          </div>
+        ))}
+        
+        {showDiagram && (
+          <div className="dialog-item visible">
             <img 
               src={diagramUrl} 
-              alt="DevOps Process Flow Diagram showing Code to Kubernetes deployment pipeline"
+              alt="Azure DevOps Architecture Diagram showing complete deployment pipeline"
               className="architecture-image"
             />
           </div>
-        </div>
+        )}
       </div>
-    );
-  }
-
-  return (
-    <div className="slideshow-container">
-      {slides.map((slide, index) => (
-        <div
-          key={index}
-          className={`slide ${index === currentSlide ? 'active' : ''}`}
-        >
-          <div className="slide-content">
-            <p className="slide-text">
-              {slide}
-            </p>
-          </div>
-        </div>
-      ))}
     </div>
   );
 };
