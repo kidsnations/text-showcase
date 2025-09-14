@@ -2,12 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Professional Slideshow Design System */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 @layer base {
   :root {
+    /* Slideshow Theme */
+    --slideshow-bg: 0 0% 0%;
+    --slideshow-text: 0 0% 100%;
+    --slideshow-muted: 0 0% 70%;
+    
+    /* Standard System Colors */
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 
@@ -100,6 +105,37 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-inter;
+  }
+}
+
+@layer components {
+  /* Slideshow Styles */
+  .slideshow-container {
+    @apply fixed inset-0 bg-slideshow text-slideshow-text font-inter;
+  }
+  
+  .slide {
+    @apply absolute inset-0 flex items-center justify-center p-8 opacity-0 transition-opacity duration-1000 ease-in-out;
+  }
+  
+  .slide.active {
+    @apply opacity-100;
+  }
+  
+  .slide-content {
+    @apply text-center max-w-4xl mx-auto;
+  }
+  
+  .slide-text {
+    @apply text-2xl md:text-4xl lg:text-5xl font-light leading-relaxed tracking-wide;
+  }
+  
+  .technical-note {
+    @apply text-lg md:text-xl lg:text-2xl font-normal leading-relaxed text-slideshow-muted mb-8;
+  }
+  
+  .architecture-image {
+    @apply max-w-full max-h-96 object-contain mx-auto rounded-lg shadow-2xl;
   }
 }

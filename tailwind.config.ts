@@ -13,7 +13,15 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        inter: ['Inter', 'sans-serif'],
+      },
       colors: {
+        'slideshow': {
+          DEFAULT: "hsl(var(--slideshow-bg))",
+          text: "hsl(var(--slideshow-text))",
+          muted: "hsl(var(--slideshow-muted))",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
