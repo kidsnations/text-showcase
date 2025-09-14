@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react';
-import azureArchitecture from '@/assets/azure-architecture.png';
 
 const slides = [
   "Sir, I am unable to relocate due to family responsibilities.",
   "I am the only child, taking care of my parents, my wife, and three children.",
-  "My parents are over 68 and unable to manage day-to-day family needs on their own.",
-  "If possible, please assign me to any DevOps project. I promise to deliver results in minimal time."
+  "My parents are over 68 and unable to manage their day-to-day needs on their own.",
+  "I understand the costs in the Caesars project are increasing. I sincerely request you to consider me for any DevOps project that can be managed from offshore. I promise to deliver results in minimal time.",
+  "The next steps will be to automate the infrastructure code using Terraform and migrate this website into a containerized environment with Azure Kubernetes Services (AKS) and Azure Container Registry (ACR)."
 ];
 
-const technicalNote = "This is a monolithic website, and the next step is to migrate it to containers using Azure Kubernetes Services (AKS) and Azure Container Registry (ACR).";
+const processFlow = "Code → Dockerfile → Docker Image → Push to ACR → Deploy to Kubernetes";
+const diagramUrl = "https://raw.githubusercontent.com/kidsnations/screenshots/main/<DIAGRAM_FILENAME>.png";
 
 const Slideshow = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -25,7 +26,7 @@ const Slideshow = () => {
           return prev;
         }
       });
-    }, 5000);
+    }, 3000);
 
     return () => clearInterval(timer);
   }, []);
@@ -35,12 +36,12 @@ const Slideshow = () => {
       <div className="slideshow-container">
         <div className="slide active">
           <div className="slide-content">
-            <p className="technical-note">
-              {technicalNote}
+            <p className="process-flow">
+              {processFlow}
             </p>
             <img 
-              src={azureArchitecture} 
-              alt="Azure Architecture Diagram showing migration from monolithic to containerized applications using AKS and ACR"
+              src={diagramUrl} 
+              alt="DevOps Process Flow Diagram showing Code to Kubernetes deployment pipeline"
               className="architecture-image"
             />
           </div>
